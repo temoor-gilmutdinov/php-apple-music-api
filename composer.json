@@ -1,0 +1,25 @@
+{
+  "name": "yuriyseriy/php-apple-music-api",
+  "description": "PHP implementation of API client to MusicKit of Apple",
+  "keywords": [
+    "musickit",
+    "applemusic"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Yuriy Seriy",
+      "email": "seriy.yuriy@gmail.com"
+    }
+  ],
+  "type": "library",
+  "require": {
+    "php": ">=5.4",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Seriy\\AppleMusicApi\\": "src/"
+    }
+  }
+}
