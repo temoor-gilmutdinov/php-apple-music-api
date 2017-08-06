@@ -16,7 +16,8 @@
   "type": "library",
   "require": {
     "php": ">=5.4",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "netresearch/jsonmapper": "dev-master"
   },
   "autoload": {
     "psr-4": {
