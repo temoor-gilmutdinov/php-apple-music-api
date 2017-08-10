@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class MusicVideo extends AbstractObject
+class MusicVideo
 {
     /**
      * @var string The artist’s name.

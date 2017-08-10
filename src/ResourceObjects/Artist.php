@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class Artist extends AbstractObject
+class Artist
 {
     /**
      * @var array The names of the genres associated with this artist.

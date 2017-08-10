@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class Recommendation extends AbstractObject
+class Recommendation
 {
 
     public $attributes;

@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class Genre extends AbstractObject
+class Genre
 {
     /**
      * @var string The localized name of the genre.

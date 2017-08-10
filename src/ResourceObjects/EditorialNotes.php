@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class EditorialNotes extends AbstractObject
+class EditorialNotes
 {
     /**
      * @var string Notes shown when the content is being prominently displayed.

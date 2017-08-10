@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class Storefront extends AbstractObject
+class Storefront
 {
     /**
      * @var string The localized name of the storefront.
@@ -27,4 +25,8 @@ class Storefront extends AbstractObject
      */
     public $defaultLanguageTag;
 
+    public function __construct($data)
+    {
+        print_r($data);
+    }
 }

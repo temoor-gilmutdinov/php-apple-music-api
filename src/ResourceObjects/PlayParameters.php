@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class PlayParameters extends AbstractObject
+class PlayParameters
 {
     /**
      * @var string The ID of the content to use for playback.

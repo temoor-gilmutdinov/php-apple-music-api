@@ -1,6 +1,6 @@
 <?php
 
-namespace Seriy\AppleMusicApi\CoreObjects;
+namespace AppleMusic\CoreObjects;
 
 
 class ResponseRoot
@@ -11,17 +11,17 @@ class ResponseRoot
     public $data;
 
     /**
-     * @var array The results of the operation. If there are results, the object contains contents; otherwise, it is empty or null.
+     * @var mixed The results of the operation. If there are results, the object contains contents; otherwise, it is empty or null.
      */
     public $results;
 
     /**
-     * @var array An array of one or more errors that occurred executing the operation.
+     * @var mixed An array of one or more errors that occurred executing the operation.
      */
     public $errors;
 
     /**
-     * @var array Information about the request or response. The members may be any of the endpoint parameters.
+     * @var mixed Information about the request or response. The members may be any of the endpoint parameters.
      */
     public $meta;
 

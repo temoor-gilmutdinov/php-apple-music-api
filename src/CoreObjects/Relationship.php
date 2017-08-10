@@ -1,6 +1,6 @@
 <?php
 
-namespace Seriy\AppleMusicApi\CoreObjects;
+namespace AppleMusic\CoreObjects;
 
 
 class Relationship

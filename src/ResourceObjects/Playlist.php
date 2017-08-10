@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class Playlist extends AbstractObject
+class Playlist
 {
     const PLAYLIST_TYPE_USER_SHARED = 'user-shared';
     const PLAYLIST_TYPE_EDITORIAL = 'editorial';

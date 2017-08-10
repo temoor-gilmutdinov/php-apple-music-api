@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class AppleCurator extends AbstractObject
+class AppleCurator
 {
     /**
      * @var Artwork The curator artwork.

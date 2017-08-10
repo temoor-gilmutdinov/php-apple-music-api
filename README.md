@@ -19,90 +19,90 @@ $storefronts = $client->storefronts()->all(':limit', ':offset');
 
 ```php
 // Fetch an album using its identifier.
-$albums = $client->albums()->get(':id', ':include');
+$albums = $client->albums()->get(':id');
 
 // Fetch one or more albums using their identifiers.
-$albums = $client->albums()->get([':id', ':id', ':id'], ':include');
+$albums = $client->albums()->get([':id', ':id', ':id']);
 ```
 
 ## Music Videos
 
 ```php
 // Fetch a music video using its identifier.
-$musicVideos = $client->musicVideos()->get(':id', ':include');
+$musicVideos = $client->musicVideos()->get(':id');
 
 // Fetch one or more music videos using their identifiers.
-$musicVideos = $client->musicVideos()->get([':id', ':id', ':id'], ':include');
+$musicVideos = $client->musicVideos()->get([':id', ':id', ':id']);
 ```
 
 ## Playlists
 
 ```php
 // Fetch a playlist using its identifier.
-$playlists = $client->playlists()->get(':id', ':include');
+$playlists = $client->playlists()->get(':id');
 
 // Fetch one or more playlists using their identifiers.
-$playlists = $client->playlists()->get([':id', ':id', ':id'], ':include');
+$playlists = $client->playlists()->get([':id', ':id', ':id']);
 ```
 
 ## Songs
 
 ```php
 // Fetch a song using its identifier.
-$songs = $client->songs()->get(':id', ':include');
+$songs = $client->songs()->get(':id');
 
 // Fetch one or more songs using their identifiers.
-$songs = $client->songs()->get([':id', ':id', ':id'], ':include');
+$songs = $client->songs()->get([':id', ':id', ':id']);
 ```
 
 ## Stations
 
 ```php
 // Fetch a station using its identifier.
-$stations = $client->stations()->get(':id', ':include');
+$stations = $client->stations()->get(':id');
 
 // Fetch one or more stations using their identifiers.
-$stations = $client->stations()->get([':id', ':id', ':id'], ':include');
+$stations = $client->stations()->get([':id', ':id', ':id']);
 ```
 
 ## Artists
 
 ```php
 // Fetch an artist using its identifier.
-$artists = $client->artists()->get(':id', ':include');
+$artists = $client->artists()->get(':id');
 
 // Fetch one or more artists using their identifiers.
-$artists = $client->artists()->get([':id', ':id', ':id'], ':include');
+$artists = $client->artists()->get([':id', ':id', ':id']);
 ```
 
 ## Curators
 
 ```php
 // Fetch a curator using its identifier.
-$curators = $client->curators()->get(':id', ':include');
+$curators = $client->curators()->get(':id');
 
 // Fetch one or more curators using their identifiers.
-$curators = $client->curators()->get([':id', ':id', ':id'], ':include');
+$curators = $client->curators()->get([':id', ':id', ':id']);
 ```
 
 ## Activities
 
 ```php
 // Fetch an activity using its identifier.
-$activities = $client->activities()->get(':id', ':include');
+$activities = $client->activities()->get(':id');
 
 // Fetch one or more activities using their identifiers.
-$activities = $client->activities()->get([':id', ':id', ':id'], ':include');
+$activities = $client->activities()->get([':id', ':id', ':id']);
 ```
 
 ## Apple Curators
 
 ```php
 // Fetch an Apple curator using its identifier.
-$appleCurators = $client->appleCurators()->get(':id', ':include');
+$appleCurators = $client->appleCurators()->get(':id');
 
 // Fetch one or more Apple curators using their identifiers.
-$appleCurators = $client->appleCurators()->get([':id', ':id', ':id'], ':include');
+$appleCurators = $client->appleCurators()->get([':id', ':id', ':id']);
 ```
 
 ## Charts

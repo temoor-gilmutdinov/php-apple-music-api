@@ -1,6 +1,6 @@
 <?php
 
-namespace seriy\AppleMusicApi;
+namespace AppleMusic;
 
 class LanguageCodes
 {

@@ -1,11 +1,9 @@
 <?php
 
-namespace Seriy\AppleMusicApi\ResourceObjects;
+namespace AppleMusic\ResourceObjects;
 
 
-use Seriy\AppleMusicApi\AbstractObject;
-
-class Artwork extends AbstractObject
+class Artwork
 {
     /**
      * @var integer The maximum width available for the image.
@@ -46,4 +44,17 @@ class Artwork extends AbstractObject
      * @var string The final post-tertiary text color that maybe be used if the background color is displayed.
      */
     public $textColor4;
+
+    /**
+     * @param int $width
+     * @param int $height
+     * @return string
+     */
+    public function getUrl($width = 1080, $height = 1080)
+    {
+        return strtr($this->url, [
+            '{w}' => $width,
+            '{h}' => $height
+        ]);
+    }
 }
