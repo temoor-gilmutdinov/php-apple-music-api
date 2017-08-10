@@ -13,7 +13,6 @@
       "email": "seriy.yuriy@gmail.com"
     }
   ],
-  "minimum-stability": "dev",
   "type": "library",
   "require": {
     "php": ">=5.4",
