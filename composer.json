@@ -22,5 +22,7 @@
     "psr-4": {
       "AppleMusic\\": "src/"
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
