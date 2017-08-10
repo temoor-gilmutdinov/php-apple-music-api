@@ -55,9 +55,9 @@ abstract class AbstractApi
         if (is_array($id)) {
             $params['ids'] = $id;
 
-            return $this->httpGet($path, $params);
+            return $this->requestWithStorefront($path, $params);
         } else
-            return $this->httpGet($path . '/' . $id, $params);
+            return $this->requestWithStorefront($path . '/' . $id, $params);
     }
 
     /**
