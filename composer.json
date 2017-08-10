@@ -6,7 +6,6 @@
     "applemusic"
   ],
   "license": "MIT",
-  "version": "1.0.0",
   "authors": [
     {
       "name": "Yuriy Seriy",
@@ -23,5 +22,7 @@
     "psr-4": {
       "AppleMusic\\": "src/"
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
