@@ -76,16 +76,25 @@ class Album
     {
         $this->artistName = $content['artistName'];
         $this->artwork = new Artwork($content['artwork']);
-        $this->contentRating = $content['contentRating'];
         $this->copyright = $content['copyright'];
-        $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
         $this->genreNames = $content['genreNames'];
         $this->isComplete = $content['isComplete'];
         $this->isSingle = $content['isSingle'];
         $this->name = $content['name'];
         $this->releaseDate = $content['releaseDate'];
-        $this->playParams = new PlayParameters($content['playParams']);
         $this->trackCount = $content['trackCount'];
         $this->url = $content['url'];
+
+        if (isset($content['contentRating'])) {
+            $this->contentRating = $content['contentRating'];
+        }
+
+        if (isset($content['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        }
+
+        if (isset($content['playParams'])) {
+            $this->playParams = new PlayParameters($content['playParams']);
+        }
     }
 }
