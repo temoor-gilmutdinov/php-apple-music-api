@@ -30,8 +30,11 @@ class Activity
     public function __construct($content)
     {
         $this->artwork = new Artwork($content['artwork']);
-        $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
         $this->name = $content['name'];
         $this->url = $content['url'];
+
+        if(isset($content['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        }
     }
 }

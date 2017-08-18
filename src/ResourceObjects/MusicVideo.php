@@ -73,15 +73,34 @@ class MusicVideo
 
         $this->artistName = $content['artistName'];
         $this->artwork = new Artwork($content['artwork']);
-        $this->contentRating = $content['contentRating'];
-        $this->durationInMillis = $content['durationInMillis'];
-        $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
         $this->genreNames = $content['genreNames'];
         $this->name = $content['name'];
-        $this->playParams = new PlayParameters($content['playParams']);
         $this->releaseDate = $content['releaseDate'];
-        $this->trackNumber = $content['trackNumber'];
         $this->url = $content['url'];
-        $this->videoSubType = $content['videoSubType'];
+
+        if(isset($content['contentRating'])) {
+            $this->contentRating = $content['contentRating'];
+        }
+
+        if(isset($content['durationInMillis'])) {
+            $this->durationInMillis = $content['durationInMillis'];
+        }
+
+        if(isset($content['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        }
+
+        if(isset($content['playParams'])) {
+            $this->playParams = new PlayParameters($content['playParams']);
+        }
+
+        if(isset($content['trackNumber'])) {
+            $this->trackNumber = $content['trackNumber'];
+        }
+
+        if(isset($content['videoSubType'])) {
+            $this->videoSubType = $content['videoSubType'];
+        }
+
     }
 }

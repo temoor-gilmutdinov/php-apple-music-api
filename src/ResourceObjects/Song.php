@@ -16,7 +16,6 @@ class Song
     public $artwork;
 
     /**
-     * todo тут должно быть Composer вместо array
      * @var array (Optional) The song’s composer.
      */
     public $composerName;
@@ -92,4 +91,52 @@ class Song
     public $workName;
 
     //todo albums, artists, genres relations
+
+    public function __construct($content)
+    {
+        $this->artistName = $content['artistName'];
+        $this->artwork = new Artwork($content['artwork']);
+        $this->discNumber = $content['discNumber'];
+        $this->genreNames = $content['genreNames'];
+        $this->name = $content['genreNames'];
+        $this->releaseDate = $content['releaseDate'];
+        $this->trackNumber = $content['trackNumber'];
+        $this->url = $content['url'];
+
+        if (isset($content['composerName'])) {
+            $this->composerName = $content['composerName'];
+        }
+
+        if (isset($content['contentRating'])) {
+            $this->contentRating = $content['contentRating'];
+        }
+
+        if (isset($content['durationInMillis'])) {
+            $this->durationInMillis = $content['durationInMillis'];
+        }
+
+        if (isset($content['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        }
+
+        if (isset($content['movementCount'])) {
+            $this->movementCount = $content['movementCount'];
+        }
+
+        if (isset($content['movementName'])) {
+            $this->movementName = $content['movementName'];
+        }
+
+        if (isset($content['movementNumber'])) {
+            $this->movementNumber = $content['movementNumber'];
+        }
+
+        if (isset($content['playParams'])) {
+            $this->playParams = new PlayParameters($content['playParams']);
+        }
+
+        if (isset($content['workName'])) {
+            $this->workName = $content['workName'];
+        }
+    }
 }

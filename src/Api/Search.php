@@ -10,25 +10,27 @@ class Search extends AbstractApi
      * @param null $types
      * @param null $limit
      * @param null $offset
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function query($term, $types = null, $limit = null, $offset = null)
     {
-        $params = $this->prepareParams([
+        $params = [
             'term' => urlencode($term),
             'types' => $types,
             'limit' => $limit,
             'offset' => $offset,
-        ]);
+        ];
 
-        return $this->requestWithStorefront('catalog/{storefront}/search', $params);
+        //todo переделать
+
+        return $this->request('catalog/{storefront}/search', $params);
     }
 
     /**
      * @param $term
      * @param null $types
      * @param null $limit
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return mixed
      */
     public function hints($term, $types = null, $limit = null)
     {

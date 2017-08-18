@@ -36,6 +36,9 @@ class Chart
         $this->chart = $content['chart'];
         $this->href = $content['href'];
         $this->data = $content['data'];
-        $this->next = $content['next'];
+
+        if (isset($content['next'])) {
+            $this->next = $content['next'];
+        }
     }
 }

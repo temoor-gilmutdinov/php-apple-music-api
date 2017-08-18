@@ -121,6 +121,7 @@ abstract class AbstractApi
                     $data[] = $object;
                 }
             } elseif (isset($result['results'])) {
+
                 // todo везде data, а в charts - results
                 // todo разобраться с чартами
 

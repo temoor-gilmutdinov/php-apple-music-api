@@ -8,8 +8,12 @@ use AppleMusic\ResourceObjects\Chart;
 class Charts extends AbstractApi
 {
     /**
-     * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @param $types
+     * @param null $chart
+     * @param null $genre
+     * @param null $limit
+     * @param null $offset
+     * @return array|null
      */
     public function get($types, $chart = null, $genre = null, $limit = null, $offset = null)
     {

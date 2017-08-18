@@ -9,12 +9,10 @@ class Stations extends AbstractApi
 {
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {
-        $response = $this->requestWithStorefront('catalog/{storefront}/stations', $id);
-
-        return $this->hydrateResponse($response, Station::class);
+        return $this->multiple('catalog/{storefront}/stations', $id, Station::class);
     }
 }

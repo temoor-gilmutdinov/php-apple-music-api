@@ -40,4 +40,24 @@ class Station
      */
     public $url;
 
+    public function __construct($content)
+    {
+        $this->artwork = new Artwork($content['artwork']);
+        $this->isLive = $content['isLive'];
+        $this->name = $content['name'];
+        $this->url = $content['url'];
+
+        if(isset($content['durationInMillis'])) {
+            $this->durationInMillis = $content['durationInMillis'];
+        }
+
+        if(isset($content['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        }
+
+        if(isset($content['episodeNumber'])) {
+            $this->episodeNumber = $content['episodeNumber'];
+        }
+    }
+
 }

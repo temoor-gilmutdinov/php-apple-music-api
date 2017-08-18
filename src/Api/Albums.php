@@ -9,7 +9,7 @@ class Albums extends AbstractApi
 {
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {

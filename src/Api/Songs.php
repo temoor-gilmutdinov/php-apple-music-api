@@ -9,12 +9,10 @@ class Songs extends AbstractApi
 {
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {
-        $response = $this->requestWithStorefront('catalog/{storefront}/songs', $id);
-
-        return $this->hydrateResponse($response, Song::class);
+        return $this->multiple('catalog/{storefront}/songs', $id, Song::class);
     }
 }

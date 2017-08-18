@@ -73,6 +73,30 @@ class Artwork
     /**
      * @return string
      */
+    public function getSmallUrl()
+    {
+        return $this->getUrl(100, 100);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMediumlUrl()
+    {
+        return $this->getUrl(600, 600);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStandartlUrl()
+    {
+        return $this->getUrl(1200, 1200);
+    }
+
+    /**
+     * @return string
+     */
     public function getBgColor()
     {
         return '#' . $this->bgColor;

@@ -51,4 +51,28 @@ class Playlist
     public $url;
 
     //todo curator, tracks relation
+
+    public function __construct($content)
+    {
+        $this->lastModifiedDate = $content['lastModifiedDate'];
+        $this->name = $content['name'];
+        $this->playlistType = $content['playlistType'];
+        $this->url = $content['url'];
+
+        if(isset($content['artwork'])) {
+            $this->artwork = new Artwork($content['artwork']);
+        }
+
+        if(isset($content['curatorName'])) {
+            $this->curatorName = $content['curatorName'];
+        }
+
+        if(isset($content['description'])) {
+            $this->description = $content['description'];
+        }
+
+        if(isset($content['playParams'])) {
+            $this->playParams = new PlayParameters($content['playParams']);
+        }
+    }
 }
