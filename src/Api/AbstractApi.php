@@ -3,9 +3,9 @@
 namespace AppleMusic\Api;
 
 
+use AppleMusic\CoreObjects\Resource;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use AppleMusic\Hydrator;
 
 abstract class AbstractApi
 {
@@ -18,94 +18,142 @@ abstract class AbstractApi
     private $httpClient;
 
     /**
-     * @var Hydrator|null
+     * @var string
      */
-    private $hydrator;
+    private $storefront;
 
-    public function __construct($httpClient, $hydrator)
+    /**
+     * @var string
+     */
+    private $localization;
+
+    public function __construct($httpClient)
     {
         $this->httpClient = $httpClient;
-        $this->hydrator = $hydrator;
+        $this->storefront = 'us';
     }
 
     /**
-     * @param $path
-     * @param array $params
-     * @return mixed|ResponseInterface
+     * @return string
      */
-    protected function requestWithStorefront($path, $params = [])
+    public function getStorefront()
     {
-        $url = strtr($path, [
-            '{storefront}' => 'us'
-        ]);
+        return $this->storefront;
+    }
 
-        // todo storefront
+    /**
+     * @param $storefront
+     */
+    public function setStorefront($storefront)
+    {
+        $this->storefront = $storefront;
+    }
 
-        return $this->httpGet($url, $params);
+    /**
+     * @return string
+     */
+    public function getLocalization()
+    {
+        return $this->localization;
+    }
+
+    /**
+     * @param $localization
+     */
+    public function setLocalization($localization)
+    {
+        $this->localization = $localization;
     }
 
     /**
      * @param $path
      * @param $id
-     * @param array $params
-     * @return mixed|ResponseInterface
+     * @param $entity
+     * @return array|null
      */
-    protected function multipleRequestWithStorefront($path, $id, $params = [])
+    public function multiple($path, $id, $entity)
     {
         if (is_array($id)) {
-            $params['ids'] = $id;
+            $ids = implode(',', $id);
 
-            return $this->httpGet($path, $params);
-        } else
-            return $this->httpGet($path . '/' . $id, $params);
+            return $this->request($path, ['ids' => $ids], $entity, true);
+        } else {
+            return $this->request($path . '/' . $id, [], $entity);
+        }
+    }
+
+    /**
+     * @param $path
+     * @param $params
+     * @param $entity
+     * @param $multiple
+     * @return array|null
+     */
+    protected function request($path, $params, $entity, $multiple = false)
+    {
+        $response = $this->httpGet($path, $params);
+
+        return $this->response($response, $entity, $multiple);
     }
 
     /**
      * @param ResponseInterface $response
      * @param $entity
-     * @return mixed|ResponseInterface
+     * @param bool $multiple
+     * @return array|null
      */
-    protected function hydrateResponse(ResponseInterface $response, $entity)
+    protected function response(ResponseInterface $response, $entity, $multiple = false)
     {
-        if (!$this->hydrator) {
-            return $response;
-        }
+        $contents = $response->getBody()->getContents();
 
-        if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 201) {
-//            $this->handleErrors($response);
+        $result = json_decode($contents, true);
 
-            // todo handle errors
-        }
+        $data = null;
 
-        return $this->hydrator->hydrate($response, $entity);
-    }
+        if ($multiple) {
+            $data = [];
 
-    /**
-     * @param array $params
-     * @return array
-     */
-    protected function prepareParams($params = [])
-    {
-        $result = [];
-        foreach ($params as $param => $value) {
-            if (!is_null($value)) {
-                $result[$param] = $value;
+            if( isset($result['data'])) {
+                foreach ($result['data'] as $item) {
+                    $object = new Resource($item);
+                    $object->attributes = new $entity($item['attributes']);
+
+                    $data[] = $object;
+                }
+            } elseif (isset($result['results'])) {
+                // todo везде data, а в charts - results
+                // todo разобраться с чартами
+
+                print_r($result);
+                die;
             }
+        } else {
+            $data = new Resource($result['data'][0]);
+            $data->attributes = new $entity($result['data'][0]['attributes']);
         }
 
-        return $result;
+        return $data;
     }
 
     /**
      * @param $path
-     * @param array $parameters
+     * @param array $params
      * @return mixed|ResponseInterface
      */
-    protected function httpGet($path, array $parameters = [])
+    protected function httpGet($path, array $params = [])
     {
-        if (count($parameters) > 0) {
-            $path .= '?' . http_build_query($parameters);
+        if ($this->localization) {
+            $params['l'] = $this->localization;
         }
+
+        $params = array_filter($params);
+        if (count($params) > 0) {
+            $path .= '?' . http_build_query($params);
+        }
+
+        $path = strtr($path, [
+            '{storefront}' => $this->storefront
+        ]);
 
         return $this->httpClient->request('GET', $path);
     }

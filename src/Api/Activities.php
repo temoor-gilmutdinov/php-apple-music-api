@@ -9,12 +9,10 @@ class Activities extends AbstractApi
 {
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {
-        $response = $this->multipleRequestWithStorefront('catalog/{storefront}/activities', $id);
-
-        return $this->hydrateResponse($response, Activity::class);
+        return $this->multiple('catalog/{storefront}/activities', $id, Activity::class);
     }
 }

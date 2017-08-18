@@ -66,4 +66,22 @@ class MusicVideo
     public $videoSubType;
 
     //todo albums, artists, genres
+
+    public function __construct($content)
+    {
+        //todo не совпадают параметры
+
+        $this->artistName = $content['artistName'];
+        $this->artwork = new Artwork($content['artwork']);
+        $this->contentRating = $content['contentRating'];
+        $this->durationInMillis = $content['durationInMillis'];
+        $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        $this->genreNames = $content['genreNames'];
+        $this->name = $content['name'];
+        $this->playParams = new PlayParameters($content['playParams']);
+        $this->releaseDate = $content['releaseDate'];
+        $this->trackNumber = $content['trackNumber'];
+        $this->url = $content['url'];
+        $this->videoSubType = $content['videoSubType'];
+    }
 }

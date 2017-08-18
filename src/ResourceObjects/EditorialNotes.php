@@ -14,4 +14,10 @@ class EditorialNotes
      * @var string Abbreviated notes shown in-line or when the content is shown alongside other content.
      */
     public $short;
+
+    public function __construct($content)
+    {
+        $this->standard = $content['standard'];
+        $this->short = $content['short'];
+    }
 }

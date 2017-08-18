@@ -7,26 +7,27 @@ use AppleMusic\ResourceObjects\Genre;
 
 class Genres extends AbstractApi
 {
+    /**
+     * @param null $limit
+     * @param null $offset
+     * @return array|null
+     */
     public function top($limit = null, $offset = null)
     {
-        $params = $this->prepareParams([
+        $params = [
             'limit' => $limit,
             'offset' => $offset
-        ]);
+        ];
 
-        $response = $this->requestWithStorefront('catalog/{storefront}/genres', $params);
-
-        return $this->hydrateResponse($response, Genre::class);
+        return $this->request('catalog/{storefront}/genres', $params, Genre::class, true);
     }
 
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {
-        $response = $this->multipleRequestWithStorefront('catalog/{storefront}/genres', $id);
-
-        return $this->hydrateResponse($response, Genre::class);
+        return $this->multiple('catalog/{storefront}/genres', $id, Genre::class);
     }
 }

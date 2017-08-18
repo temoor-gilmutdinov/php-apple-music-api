@@ -10,30 +10,24 @@ class Storefronts extends AbstractApi
     /**
      * @param null $limit
      * @param null $offset
-     * @param null $localization
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
-    public function all($limit = null, $offset = null, $localization = null)
+    public function all($limit = null, $offset = null)
     {
-        $params = $this->prepareParams([
+        $params = [
             'limit' => $limit,
-            'offset' => $offset,
-            'l' => $localization
-        ]);
+            'offset' => $offset
+        ];
 
-        $response = $this->httpGet('storefronts', $params);
-
-        return $this->hydrateResponse($response, Storefront::class);
+        return $this->request('storefronts', $params, Storefront::class, true);
     }
 
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {
-        $response = $this->createRequest('storefronts', $id);
-
-        return $this->hydrateResponse($response, Storefront::class);
+        return $this->request('storefronts/' . $id, [], Storefront::class);
     }
 }

@@ -17,41 +17,32 @@ class Api
     protected $logger;
 
     /**
-     * @var Hydrator
-     */
-    protected $hydrator;
-
-    /**
      * @param Client $httpClient
-     * @param Hydrator|null $hydrator
      */
-    public function __construct(Client $httpClient, Hydrator $hydrator = null)
+    public function __construct(Client $httpClient)
     {
         $this->httpClient = $httpClient;
-        $this->hydrator = $hydrator;
     }
 
     /**
      * @param $token
-     * @param Hydrator|null $hydrator
      * @return Api
      */
-    public static function create($token, Hydrator $hydrator = null)
+    public static function create($token)
     {
         $configurator = new Configuration();
         $configurator->setToken($token);
 
-        return self::configure($configurator, $hydrator);
+        return self::configure($configurator);
     }
 
     /**
      * @param Configuration $configurator
-     * @param Hydrator|null $hydrator
      * @return Api
      */
-    public static function configure(Configuration $configurator, Hydrator $hydrator = null)
+    public static function configure(Configuration $configurator)
     {
-        return new self($configurator->createClient(), $hydrator);
+        return new self($configurator->createClient());
     }
 
     /**
@@ -67,7 +58,7 @@ class Api
      */
     public function storefronts()
     {
-        return new Api\Storefronts($this->httpClient, $this->hydrator);
+        return new Api\Storefronts($this->httpClient);
     }
 
     /**
@@ -75,7 +66,7 @@ class Api
      */
     public function albums()
     {
-        return new Api\Albums($this->httpClient, $this->hydrator);
+        return new Api\Albums($this->httpClient);
     }
 
     /**
@@ -83,7 +74,7 @@ class Api
      */
     public function musicVideos()
     {
-        return new Api\MusicVideos($this->httpClient, $this->hydrator);
+        return new Api\MusicVideos($this->httpClient);
     }
 
     /**
@@ -91,7 +82,7 @@ class Api
      */
     public function playlists()
     {
-        return new Api\Playlists($this->httpClient, $this->hydrator);
+        return new Api\Playlists($this->httpClient);
     }
 
     /**
@@ -99,7 +90,7 @@ class Api
      */
     public function songs()
     {
-        return new Api\Songs($this->httpClient, $this->hydrator);
+        return new Api\Songs($this->httpClient);
     }
 
     /**
@@ -107,7 +98,7 @@ class Api
      */
     public function stations()
     {
-        return new Api\Stations($this->httpClient, $this->hydrator);
+        return new Api\Stations($this->httpClient);
     }
 
     /**
@@ -115,7 +106,7 @@ class Api
      */
     public function artists()
     {
-        return new Api\Artists($this->httpClient, $this->hydrator);
+        return new Api\Artists($this->httpClient);
     }
 
     /**
@@ -123,7 +114,7 @@ class Api
      */
     public function curators()
     {
-        return new Api\Curators($this->httpClient, $this->hydrator);
+        return new Api\Curators($this->httpClient);
     }
 
     /**
@@ -131,7 +122,7 @@ class Api
      */
     public function activities()
     {
-        return new Api\Activities($this->httpClient, $this->hydrator);
+        return new Api\Activities($this->httpClient);
     }
 
     /**
@@ -139,7 +130,7 @@ class Api
      */
     public function appleCurators()
     {
-        return new Api\AppleCurators($this->httpClient, $this->hydrator);
+        return new Api\AppleCurators($this->httpClient);
     }
 
     /**
@@ -147,7 +138,7 @@ class Api
      */
     public function charts()
     {
-        return new Api\Charts($this->httpClient, $this->hydrator);
+        return new Api\Charts($this->httpClient);
     }
 
     /**
@@ -155,7 +146,7 @@ class Api
      */
     public function genres()
     {
-        return new Api\Genres($this->httpClient, $this->hydrator);
+        return new Api\Genres($this->httpClient);
     }
 
     /**
@@ -163,6 +154,6 @@ class Api
      */
     public function search()
     {
-        return new Api\Search($this->httpClient, $this->hydrator);
+        return new Api\Search($this->httpClient);
     }
 }

@@ -10,4 +10,8 @@ class Genre
      */
     public $name;
 
+    public function __construct($content)
+    {
+        $this->name = $content['name'];
+    }
 }

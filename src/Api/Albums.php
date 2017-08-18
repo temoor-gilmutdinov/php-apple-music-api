@@ -13,9 +13,6 @@ class Albums extends AbstractApi
      */
     public function get($id)
     {
-        $response = $this->multipleRequestWithStorefront('catalog/{storefront}/albums', $id);
-
-        return $this->hydrateResponse($response, Album::class);
+        return $this->multiple('catalog/{storefront}/albums', $id, Album::class);
     }
-
 }

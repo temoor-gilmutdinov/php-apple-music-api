@@ -9,12 +9,10 @@ class AppleCurators extends AbstractApi
 {
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {
-        $response = $this->multipleRequestWithStorefront('catalog/{storefront}/apple-curators', $id);
-
-        return $this->hydrateResponse($response, AppleCurator::class);
+        return $this->multiple('catalog/{storefront}/apple-curators', $id, AppleCurator::class);
     }
 }

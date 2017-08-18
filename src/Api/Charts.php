@@ -13,16 +13,14 @@ class Charts extends AbstractApi
      */
     public function get($types, $chart = null, $genre = null, $limit = null, $offset = null)
     {
-        $params = $this->prepareParams([
-            'types' => $types,
+        $params = [
+            'types' => implode(',', $types),
             'chart' => $chart,
             'genre' => $genre,
             'limit' => $limit,
             'offset' => $offset
-        ]);
+        ];
 
-        $response = $this->requestWithStorefront('catalog/{storefront}/charts', $params);
-
-        return $this->hydrateResponse($response, Chart::class);
+        return $this->request('catalog/{storefront}/charts', $params, Chart::class, true);
     }
 }

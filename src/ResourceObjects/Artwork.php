@@ -45,6 +45,18 @@ class Artwork
      */
     public $textColor4;
 
+    public function __construct($content)
+    {
+        $this->width = $content['width'];
+        $this->height = $content['height'];
+        $this->url = $content['url'];
+        $this->bgColor = $content['bgColor'];
+        $this->textColor1 = $content['textColor1'];
+        $this->textColor2 = $content['textColor2'];
+        $this->textColor3 = $content['textColor3'];
+        $this->textColor4 = $content['textColor4'];
+    }
+
     /**
      * @param int $width
      * @param int $height
@@ -56,5 +68,45 @@ class Artwork
             '{w}' => $width,
             '{h}' => $height
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBgColor()
+    {
+        return '#' . $this->bgColor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextColor1()
+    {
+        return '#' . $this->textColor1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextColor2()
+    {
+        return '#' . $this->textColor2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextColor3()
+    {
+        return '#' . $this->textColor3;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextColor4()
+    {
+        return '#' . $this->textColor4;
     }
 }

@@ -29,4 +29,13 @@ class Chart
      * @var string (Optional) The URL for the next page.
      */
     public $next;
+
+    public function __construct($content)
+    {
+        $this->name = $content['name'];
+        $this->chart = $content['chart'];
+        $this->href = $content['href'];
+        $this->data = $content['data'];
+        $this->next = $content['next'];
+    }
 }

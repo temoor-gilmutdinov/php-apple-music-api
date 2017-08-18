@@ -9,12 +9,10 @@ class Curators extends AbstractApi
 {
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {
-        $response = $this->requestWithStorefront('catalog/{storefront}/curators', $id);
-
-        return $this->hydrateResponse($response, Curator::class);
+        return $this->multiple('catalog/{storefront}/curators', $id, Curator::class);
     }
 }

@@ -9,12 +9,10 @@ class MusicVideos extends AbstractApi
 {
     /**
      * @param $id
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @return array|null
      */
     public function get($id)
     {
-        $response = $this->requestWithStorefront('catalog/{storefront}/music-videos', $id);
-
-        return $this->hydrateResponse($response, MusicVideo::class);
+        return $this->multiple('catalog/{storefront}/music-videos', $id, MusicVideo::class);
     }
 }

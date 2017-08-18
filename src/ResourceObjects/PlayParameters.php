@@ -15,4 +15,9 @@ class PlayParameters
      */
     public $kind;
 
+    public function __construct($content)
+    {
+        $this->id = $content['id'];
+        $this->kind = $content['kind'];
+    }
 }
