@@ -41,11 +41,11 @@ class Resource
         $this->type = $data['type'];
         $this->href = $data['href'];
 
-        if ($data['attributes']) {
+        if (!empty($data['attributes'])) {
             $this->attributes($data['attributes']);
         }
 
-        if ($data['relationships']) {
+        if (!empty($data['relationships'])) {
             $this->relationships($data['relationships']);
         }
     }
