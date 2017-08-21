@@ -9,10 +9,13 @@ class AppleCurators extends AbstractApi
 {
     /**
      * @param $id
+     * @param array $include
      * @return array|null
      */
-    public function get($id)
+    public function get($id, $include = [])
     {
-        return $this->multiple('catalog/{storefront}/apple-curators', $id, AppleCurator::class);
+        return $this->multiple('catalog/{storefront}/apple-curators', $id, AppleCurator::class, [
+            'include' => implode(',', $include)
+        ]);
     }
 }

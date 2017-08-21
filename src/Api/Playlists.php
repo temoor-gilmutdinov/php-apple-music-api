@@ -9,10 +9,13 @@ class Playlists extends AbstractApi
 {
     /**
      * @param $id
+     * @param array $include
      * @return array|null
      */
-    public function get($id)
+    public function get($id, $include = [])
     {
-        return $this->multiple('catalog/{storefront}/playlists', $id, Playlist::class);
+        return $this->multiple('catalog/{storefront}/playlists', $id, Playlist::class, [
+            'include' => implode(',', $include)
+        ]);
     }
 }
