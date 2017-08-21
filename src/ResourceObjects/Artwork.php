@@ -50,11 +50,26 @@ class Artwork
         $this->width = $content['width'];
         $this->height = $content['height'];
         $this->url = $content['url'];
-        $this->bgColor = $content['bgColor'];
-        $this->textColor1 = $content['textColor1'];
-        $this->textColor2 = $content['textColor2'];
-        $this->textColor3 = $content['textColor3'];
-        $this->textColor4 = $content['textColor4'];
+
+        if (isset($content['bgColor'])) {
+            $this->bgColor = $content['bgColor'];
+        }
+
+        if (isset($content['textColor1'])) {
+            $this->textColor1 = $content['textColor1'];
+        }
+
+        if (isset($content['textColor2'])) {
+            $this->textColor2 = $content['textColor2'];
+        }
+
+        if (isset($content['textColor3'])) {
+            $this->textColor3 = $content['textColor3'];
+        }
+
+        if (isset($content['textColor4'])) {
+            $this->textColor4 = $content['textColor4'];
+        }
     }
 
     /**
