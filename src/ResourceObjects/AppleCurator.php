@@ -3,7 +3,7 @@
 namespace AppleMusic\ResourceObjects;
 
 
-class AppleCurator
+class AppleCurator extends Resource
 {
     /**
      * @var Artwork The curator artwork.
@@ -21,20 +21,32 @@ class AppleCurator
     public $name;
 
     /**
-     * @var string The URL for sharing an curator in the iTunes Store.
+     * @var string The playlists associated with this curator.
      */
     public $url;
 
-    //todo playlist relation
+    /**
+     * @var array The playlists associated with this activity.
+     */
+    public $playlists = [];
 
-    public function __construct($content)
+    public function attributes($data)
     {
-        $this->artwork = new Artwork($content['artwork']);
-        $this->name = $content['name'];
-        $this->url = $content['url'];
+        $this->artwork = new Artwork($data['artwork']);
+        $this->name = $data['name'];
+        $this->url = $data['url'];
 
-        if(isset($content['editorialNotes'])) {
-            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        if (isset($data['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($data['editorialNotes']);
+        }
+    }
+
+    public function relationships($data)
+    {
+        if (isset($data['playlists'])) {
+            foreach ($data['playlists']['data'] as $artist) {
+                $this->playlists[] = new Playlist($artist);
+            }
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace AppleMusic\ResourceObjects;
 
 
-class MusicVideo
+class MusicVideo extends Resource
 {
     /**
      * @var string The artist’s name.
@@ -65,42 +65,75 @@ class MusicVideo
      */
     public $videoSubType;
 
-    //todo albums, artists, genres
+    /**
+     * @var array The albums associated with the music video.
+     */
+    public $albums = [];
 
-    public function __construct($content)
+    /**
+     * @var array The artists associated with the music video.
+     */
+    public $artists = [];
+
+    /**
+     * @var array The genres associated with the music video.
+     */
+    public $genres = [];
+
+    public function attributes($data)
     {
         //todo не совпадают параметры
 
-        $this->artistName = $content['artistName'];
-        $this->artwork = new Artwork($content['artwork']);
-        $this->genreNames = $content['genreNames'];
-        $this->name = $content['name'];
-        $this->releaseDate = $content['releaseDate'];
-        $this->url = $content['url'];
+        $this->artistName = $data['artistName'];
+        $this->artwork = new Artwork($data['artwork']);
+        $this->genreNames = $data['genreNames'];
+        $this->name = $data['name'];
+        $this->releaseDate = $data['releaseDate'];
+        $this->url = $data['url'];
 
-        if(isset($content['contentRating'])) {
-            $this->contentRating = $content['contentRating'];
+        if(isset($data['contentRating'])) {
+            $this->contentRating = $data['contentRating'];
         }
 
-        if(isset($content['durationInMillis'])) {
-            $this->durationInMillis = $content['durationInMillis'];
+        if(isset($data['durationInMillis'])) {
+            $this->durationInMillis = $data['durationInMillis'];
         }
 
-        if(isset($content['editorialNotes'])) {
-            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        if(isset($data['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($data['editorialNotes']);
         }
 
-        if(isset($content['playParams'])) {
-            $this->playParams = new PlayParameters($content['playParams']);
+        if(isset($data['playParams'])) {
+            $this->playParams = new PlayParameters($data['playParams']);
         }
 
-        if(isset($content['trackNumber'])) {
-            $this->trackNumber = $content['trackNumber'];
+        if(isset($data['trackNumber'])) {
+            $this->trackNumber = $data['trackNumber'];
         }
 
-        if(isset($content['videoSubType'])) {
-            $this->videoSubType = $content['videoSubType'];
+        if(isset($data['videoSubType'])) {
+            $this->videoSubType = $data['videoSubType'];
+        }
+    }
+
+    public function relationships($data)
+    {
+        if (isset($data['albums'])) {
+            foreach ($data['albums']['data'] as $album) {
+                $this->albums[] = new Album($album);
+            }
         }
 
+        if (isset($data['artists'])) {
+            foreach ($data['artists']['data'] as $artist) {
+                $this->artists[] = new Artist($artist);
+            }
+        }
+
+        if (isset($data['genres'])) {
+            foreach ($data['genres']['data'] as $genre) {
+                $this->genres[] = new Genre($genre);
+            }
+        }
     }
 }

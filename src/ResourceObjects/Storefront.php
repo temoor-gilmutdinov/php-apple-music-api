@@ -25,10 +25,10 @@ class Storefront
      */
     public $defaultLanguageTag;
 
-    public function __construct($content)
+    public function __construct($data)
     {
-        $this->name = $content['name'];
-        $this->supportedLanguageTags = $content['supportedLanguageTags'];
-        $this->defaultLanguageTag = $content['defaultLanguageTag'];
+        $this->name = $data['name'];
+        $this->supportedLanguageTags = $data['supportedLanguageTags'];
+        $this->defaultLanguageTag = $data['defaultLanguageTag'];
     }
 }

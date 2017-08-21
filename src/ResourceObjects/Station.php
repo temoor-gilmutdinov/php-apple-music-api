@@ -3,7 +3,7 @@
 namespace AppleMusic\ResourceObjects;
 
 
-class Station
+class Station extends Resource
 {
     /**
      * @var Artwork The radio station artwork.
@@ -40,23 +40,23 @@ class Station
      */
     public $url;
 
-    public function __construct($content)
+    public function attributes($data)
     {
-        $this->artwork = new Artwork($content['artwork']);
-        $this->isLive = $content['isLive'];
-        $this->name = $content['name'];
-        $this->url = $content['url'];
+        $this->artwork = new Artwork($data['artwork']);
+        $this->isLive = $data['isLive'];
+        $this->name = $data['name'];
+        $this->url = $data['url'];
 
-        if(isset($content['durationInMillis'])) {
-            $this->durationInMillis = $content['durationInMillis'];
+        if(isset($data['durationInMillis'])) {
+            $this->durationInMillis = $data['durationInMillis'];
         }
 
-        if(isset($content['editorialNotes'])) {
-            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        if(isset($data['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($data['editorialNotes']);
         }
 
-        if(isset($content['episodeNumber'])) {
-            $this->episodeNumber = $content['episodeNumber'];
+        if(isset($data['episodeNumber'])) {
+            $this->episodeNumber = $data['episodeNumber'];
         }
     }
 

@@ -71,14 +71,14 @@ abstract class AbstractApi
      * @param $entity
      * @return array|null
      */
-    public function multiple($path, $id, $entity)
+    public function multiple($path, $id, $entity, $params = [])
     {
         if (is_array($id)) {
-            $ids = implode(',', $id);
+            $params['ids'] = implode(',', $id);
 
-            return $this->request($path, ['ids' => $ids], $entity, true);
+            return $this->request($path, $params, $entity, true);
         } else {
-            return $this->request($path . '/' . $id, [], $entity);
+            return $this->request($path . '/' . $id, $params, $entity);
         }
     }
 
@@ -113,12 +113,9 @@ abstract class AbstractApi
         if ($multiple) {
             $data = [];
 
-            if( isset($result['data'])) {
+            if (isset($result['data'])) {
                 foreach ($result['data'] as $item) {
-                    $object = new Resource($item);
-                    $object->attributes = new $entity($item['attributes']);
-
-                    $data[] = $object;
+                    $data[] = new $entity($item);
                 }
             } elseif (isset($result['results'])) {
 
@@ -129,8 +126,7 @@ abstract class AbstractApi
                 die;
             }
         } else {
-            $data = new Resource($result['data'][0]);
-            $data->attributes = new $entity($result['data'][0]['attributes']);
+            $data = new $entity($result['data'][0]);
         }
 
         return $data;

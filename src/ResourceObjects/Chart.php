@@ -30,15 +30,15 @@ class Chart
      */
     public $next;
 
-    public function __construct($content)
+    public function __construct($data)
     {
-        $this->name = $content['name'];
-        $this->chart = $content['chart'];
-        $this->href = $content['href'];
-        $this->data = $content['data'];
+        $this->name = $data['name'];
+        $this->chart = $data['chart'];
+        $this->href = $data['href'];
+        $this->data = $data['data'];
 
-        if (isset($content['next'])) {
-            $this->next = $content['next'];
+        if (isset($data['next'])) {
+            $this->next = $data['next'];
         }
     }
 }

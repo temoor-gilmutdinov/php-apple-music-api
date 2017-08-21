@@ -3,7 +3,7 @@
 namespace AppleMusic\ResourceObjects;
 
 
-class Playlist
+class Playlist extends Resource
 {
     const PLAYLIST_TYPE_USER_SHARED = 'user-shared';
     const PLAYLIST_TYPE_EDITORIAL = 'editorial';
@@ -50,29 +50,52 @@ class Playlist
      */
     public $url;
 
-    //todo curator, tracks relation
+    /**
+     * @var array The curator that created the playlist.
+     */
+    public $curator = [];
 
-    public function __construct($content)
+    /**
+     * @var array The songs and music videos included in the playlist.
+     */
+    public $songs = [];
+
+    public function attributes($data)
     {
-        $this->lastModifiedDate = $content['lastModifiedDate'];
-        $this->name = $content['name'];
-        $this->playlistType = $content['playlistType'];
-        $this->url = $content['url'];
+        $this->lastModifiedDate = $data['lastModifiedDate'];
+        $this->name = $data['name'];
+        $this->playlistType = $data['playlistType'];
+        $this->url = $data['url'];
 
-        if(isset($content['artwork'])) {
-            $this->artwork = new Artwork($content['artwork']);
+        if(isset($data['artwork'])) {
+            $this->artwork = new Artwork($data['artwork']);
         }
 
-        if(isset($content['curatorName'])) {
-            $this->curatorName = $content['curatorName'];
+        if(isset($data['curatorName'])) {
+            $this->curatorName = $data['curatorName'];
         }
 
-        if(isset($content['description'])) {
-            $this->description = $content['description'];
+        if(isset($data['description'])) {
+            $this->description = $data['description'];
         }
 
-        if(isset($content['playParams'])) {
-            $this->playParams = new PlayParameters($content['playParams']);
+        if(isset($data['playParams'])) {
+            $this->playParams = new PlayParameters($data['playParams']);
+        }
+    }
+
+    public function relationships($data)
+    {
+        if (isset($data['curator'])) {
+            foreach ($data['albums']['data'] as $album) {
+                $this->curator[] = new Album($album);
+            }
+        }
+
+        if (isset($data['tracks'])) {
+            foreach ($data['tracks']['data'] as $song) {
+                $this->songs[] = new Song($song);
+            }
         }
     }
 }

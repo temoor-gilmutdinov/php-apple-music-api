@@ -9,10 +9,13 @@ class Albums extends AbstractApi
 {
     /**
      * @param $id
+     * @param array $include
      * @return array|null
      */
-    public function get($id)
+    public function get($id, $include = [])
     {
-        return $this->multiple('catalog/{storefront}/albums', $id, Album::class);
+        return $this->multiple('catalog/{storefront}/albums', $id, Album::class, [
+            'include' => implode(',', $include)
+        ]);
     }
 }

@@ -15,9 +15,9 @@ class EditorialNotes
      */
     public $short;
 
-    public function __construct($content)
+    public function __construct($data)
     {
-        $this->standard = $content['standard'];
-        $this->short = $content['short'];
+        $this->standard = $data['standard'];
+        $this->short = $data['short'];
     }
 }

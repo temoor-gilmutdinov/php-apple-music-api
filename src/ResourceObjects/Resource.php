@@ -1,6 +1,6 @@
 <?php
 
-namespace AppleMusic\CoreObjects;
+namespace AppleMusic\ResourceObjects;
 
 
 class Resource
@@ -23,24 +23,38 @@ class Resource
     /**
      * @var array Attributes belonging to the resource (can be a subset of the attributes). The members are the names of the attributes defined in the object model.
      */
-    public $attributes = [];
+//    public $attributes = [];
 
     /**
      * @var array Relationships belonging to the resource (can be a subset of the relationships). The members are the names of the relationships defined in the object model.
      */
-    public $relationships = [];
+//    public $relationships = [];
 
     /**
      * @var array Information about the request or response. The members may be any of the endpoint parameters.
      */
-    public $meta = [];
+//    public $meta = [];
 
-    public function __construct($content)
+    public function __construct($data)
     {
-        $this->id = $content['id'];
-        $this->type = $content['type'];
-        $this->href = $content['href'];
+        $this->id = $data['id'];
+        $this->type = $data['type'];
+        $this->href = $data['href'];
 
-        // todo relationships, meta
+        if ($data['attributes']) {
+            $this->attributes($data['attributes']);
+        }
+
+        if ($data['relationships']) {
+            $this->relationships($data['relationships']);
+        }
+    }
+
+    public function attributes($data)
+    {
+    }
+
+    public function relationships($data)
+    {
     }
 }

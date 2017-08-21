@@ -3,7 +3,7 @@
 namespace AppleMusic\ResourceObjects;
 
 
-class Activity
+class Activity extends Resource
 {
     /**
      * @var Artwork The activity artwork.
@@ -25,16 +25,28 @@ class Activity
      */
     public $url;
 
-    // todo have a Relationships
+    /**
+     * @var array The playlists associated with this activity.
+     */
+    public $playlists = [];
 
-    public function __construct($content)
+    public function attributes($data)
     {
-        $this->artwork = new Artwork($content['artwork']);
-        $this->name = $content['name'];
-        $this->url = $content['url'];
+        $this->artwork = new Artwork($data['artwork']);
+        $this->name = $data['name'];
+        $this->url = $data['url'];
 
-        if(isset($content['editorialNotes'])) {
-            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        if (isset($data['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($data['editorialNotes']);
+        }
+    }
+
+    public function relationships($data)
+    {
+        if (isset($data['playlists'])) {
+            foreach ($data['playlists']['data'] as $artist) {
+                $this->playlists[] = new Playlist($artist);
+            }
         }
     }
 }

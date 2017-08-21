@@ -3,7 +3,7 @@
 namespace AppleMusic\ResourceObjects;
 
 
-class Song
+class Song extends Resource
 {
     /**
      * @var string The artist’s name.
@@ -90,53 +90,89 @@ class Song
      */
     public $workName;
 
-    //todo albums, artists, genres relations
+    /**
+     * @var array The albums associated with the song.
+     */
+    public $albums = [];
 
-    public function __construct($content)
+    /**
+     * @var array The artists associated with the song.
+     */
+    public $artists = [];
+
+    /**
+     * @var array The genres associated with the song.
+     */
+    public $genres = [];
+
+    public function attributes($data)
     {
-        $this->artistName = $content['artistName'];
-        $this->artwork = new Artwork($content['artwork']);
-        $this->discNumber = $content['discNumber'];
-        $this->genreNames = $content['genreNames'];
-        $this->name = $content['genreNames'];
-        $this->releaseDate = $content['releaseDate'];
-        $this->trackNumber = $content['trackNumber'];
-        $this->url = $content['url'];
+        // todo как быть с $data['previews']
 
-        if (isset($content['composerName'])) {
-            $this->composerName = $content['composerName'];
+        $this->artistName = $data['artistName'];
+        $this->artwork = new Artwork($data['artwork']);
+        $this->discNumber = $data['discNumber'];
+        $this->genreNames = $data['genreNames'];
+        $this->name = $data['genreNames'];
+        $this->releaseDate = $data['releaseDate'];
+        $this->trackNumber = $data['trackNumber'];
+        $this->url = $data['url'];
+
+        if (isset($data['composerName'])) {
+            $this->composerName = $data['composerName'];
         }
 
-        if (isset($content['contentRating'])) {
-            $this->contentRating = $content['contentRating'];
+        if (isset($data['contentRating'])) {
+            $this->contentRating = $data['contentRating'];
         }
 
-        if (isset($content['durationInMillis'])) {
-            $this->durationInMillis = $content['durationInMillis'];
+        if (isset($data['durationInMillis'])) {
+            $this->durationInMillis = $data['durationInMillis'];
         }
 
-        if (isset($content['editorialNotes'])) {
-            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        if (isset($data['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($data['editorialNotes']);
         }
 
-        if (isset($content['movementCount'])) {
-            $this->movementCount = $content['movementCount'];
+        if (isset($data['movementCount'])) {
+            $this->movementCount = $data['movementCount'];
         }
 
-        if (isset($content['movementName'])) {
-            $this->movementName = $content['movementName'];
+        if (isset($data['movementName'])) {
+            $this->movementName = $data['movementName'];
         }
 
-        if (isset($content['movementNumber'])) {
-            $this->movementNumber = $content['movementNumber'];
+        if (isset($data['movementNumber'])) {
+            $this->movementNumber = $data['movementNumber'];
         }
 
-        if (isset($content['playParams'])) {
-            $this->playParams = new PlayParameters($content['playParams']);
+        if (isset($data['playParams'])) {
+            $this->playParams = new PlayParameters($data['playParams']);
         }
 
-        if (isset($content['workName'])) {
-            $this->workName = $content['workName'];
+        if (isset($data['workName'])) {
+            $this->workName = $data['workName'];
+        }
+    }
+
+    public function relationships($data)
+    {
+        if (isset($data['albums'])) {
+            foreach ($data['albums']['data'] as $album) {
+                $this->albums[] = new Album($album);
+            }
+        }
+
+        if (isset($data['artists'])) {
+            foreach ($data['artists']['data'] as $artist) {
+                $this->artists[] = new Artist($artist);
+            }
+        }
+
+        if (isset($data['genres'])) {
+            foreach ($data['genres']['data'] as $genre) {
+                $this->genres[] = new Genre($genre);
+            }
         }
     }
 }

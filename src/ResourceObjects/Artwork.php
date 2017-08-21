@@ -45,30 +45,30 @@ class Artwork
      */
     public $textColor4;
 
-    public function __construct($content)
+    public function __construct($data)
     {
-        $this->width = $content['width'];
-        $this->height = $content['height'];
-        $this->url = $content['url'];
+        $this->width = $data['width'];
+        $this->height = $data['height'];
+        $this->url = $data['url'];
 
-        if (isset($content['bgColor'])) {
-            $this->bgColor = $content['bgColor'];
+        if (isset($data['bgColor'])) {
+            $this->bgColor = $data['bgColor'];
         }
 
-        if (isset($content['textColor1'])) {
-            $this->textColor1 = $content['textColor1'];
+        if (isset($data['textColor1'])) {
+            $this->textColor1 = $data['textColor1'];
         }
 
-        if (isset($content['textColor2'])) {
-            $this->textColor2 = $content['textColor2'];
+        if (isset($data['textColor2'])) {
+            $this->textColor2 = $data['textColor2'];
         }
 
-        if (isset($content['textColor3'])) {
-            $this->textColor3 = $content['textColor3'];
+        if (isset($data['textColor3'])) {
+            $this->textColor3 = $data['textColor3'];
         }
 
-        if (isset($content['textColor4'])) {
-            $this->textColor4 = $content['textColor4'];
+        if (isset($data['textColor4'])) {
+            $this->textColor4 = $data['textColor4'];
         }
     }
 
@@ -83,30 +83,6 @@ class Artwork
             '{w}' => $width,
             '{h}' => $height
         ]);
-    }
-
-    /**
-     * @return string
-     */
-    public function getSmallUrl()
-    {
-        return $this->getUrl(100, 100);
-    }
-
-    /**
-     * @return string
-     */
-    public function getMediumlUrl()
-    {
-        return $this->getUrl(600, 600);
-    }
-
-    /**
-     * @return string
-     */
-    public function getStandartlUrl()
-    {
-        return $this->getUrl(1200, 1200);
     }
 
     /**

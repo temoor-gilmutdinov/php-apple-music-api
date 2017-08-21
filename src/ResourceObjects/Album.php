@@ -3,7 +3,7 @@
 namespace AppleMusic\ResourceObjects;
 
 
-class Album
+class Album extends Resource
 {
     /**
      * @var string The artist’s name.
@@ -70,31 +70,65 @@ class Album
      */
     public $url;
 
-    // todo artists, genres, tracks Relationships
+    /**
+     * @var array The artists associated with the album.
+     */
+    public $artists = [];
 
-    public function __construct($content)
+    /**
+     * @var array The genres for the album.
+     */
+    public $genres = [];
+
+    /**
+     * @var array The songs and music videos on the album.
+     */
+    public $songs = [];
+
+    public function attributes($data)
     {
-        $this->artistName = $content['artistName'];
-        $this->artwork = new Artwork($content['artwork']);
-        $this->copyright = $content['copyright'];
-        $this->genreNames = $content['genreNames'];
-        $this->isComplete = $content['isComplete'];
-        $this->isSingle = $content['isSingle'];
-        $this->name = $content['name'];
-        $this->releaseDate = $content['releaseDate'];
-        $this->trackCount = $content['trackCount'];
-        $this->url = $content['url'];
+        $this->artistName = $data['artistName'];
+        $this->artwork = new Artwork($data['artwork']);
+        $this->copyright = $data['copyright'];
+        $this->genreNames = $data['genreNames'];
+        $this->isComplete = $data['isComplete'];
+        $this->isSingle = $data['isSingle'];
+        $this->name = $data['name'];
+        $this->releaseDate = $data['releaseDate'];
+        $this->trackCount = $data['trackCount'];
+        $this->url = $data['url'];
 
-        if (isset($content['contentRating'])) {
-            $this->contentRating = $content['contentRating'];
+        if (isset($data['contentRating'])) {
+            $this->contentRating = $data['contentRating'];
         }
 
-        if (isset($content['editorialNotes'])) {
-            $this->editorialNotes = new EditorialNotes($content['editorialNotes']);
+        if (isset($data['editorialNotes'])) {
+            $this->editorialNotes = new EditorialNotes($data['editorialNotes']);
         }
 
-        if (isset($content['playParams'])) {
-            $this->playParams = new PlayParameters($content['playParams']);
+        if (isset($data['playParams'])) {
+            $this->playParams = new PlayParameters($data['playParams']);
+        }
+    }
+
+    public function relationships($data)
+    {
+        if (isset($data['artists'])) {
+            foreach ($data['artists']['data'] as $artist) {
+                $this->artists[] = new Artist($artist);
+            }
+        }
+
+        if (isset($data['tracks'])) {
+            foreach ($data['tracks']['data'] as $track) {
+                $this->songs[] = new Song($track);
+            }
+        }
+
+        if (isset($data['genres'])) {
+            foreach ($data['genres']['data'] as $genre) {
+                $this->genres[] = new Genre($genre);
+            }
         }
     }
 }
