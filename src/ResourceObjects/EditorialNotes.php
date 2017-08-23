@@ -17,7 +17,12 @@ class EditorialNotes
 
     public function __construct($data)
     {
-        $this->standard = $data['standard'];
-        $this->short = $data['short'];
+        if (isset($data['standard'])) {
+            $this->standard = $data['standard'];
+        }
+
+        if (isset($data['short'])) {
+            $this->short = $data['short'];
+        }
     }
 }
