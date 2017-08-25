@@ -79,6 +79,14 @@ abstract class Api
     }
 
     /**
+     * @return array get results
+     */
+    public function getContents()
+    {
+        return $this->result;
+    }
+
+    /**
      * @param $path
      * @param $id
      * @param $entity

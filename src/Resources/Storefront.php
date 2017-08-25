@@ -3,7 +3,9 @@
 namespace AppleMusic\Resources;
 
 
-class Storefront
+use AppleMusic\Resource;
+
+class Storefront extends Resource
 {
     /**
      * @var string The localized name of the storefront.
@@ -25,7 +27,7 @@ class Storefront
      */
     public $defaultLanguageTag;
 
-    public function __construct($data)
+    public function attributes($data)
     {
         $this->name = $data['name'];
         $this->supportedLanguageTags = $data['supportedLanguageTags'];
