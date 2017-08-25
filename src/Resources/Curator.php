@@ -1,9 +1,11 @@
 <?php
 
-namespace AppleMusic\ResourceObjects;
+namespace AppleMusic\Resources;
 
 
-class AppleCurator extends Resource
+use AppleMusic\Resource;
+
+class Curator extends Resource
 {
     /**
      * @var Artwork The curator artwork.
@@ -11,7 +13,7 @@ class AppleCurator extends Resource
     public $artwork;
 
     /**
-     * @var EditorialNotes (Optional) The notes about the curator that appear in the iTunes Store.
+     * @var EditorialNotes (Optional) The notes about the curator.
      */
     public $editorialNotes;
 
@@ -21,12 +23,12 @@ class AppleCurator extends Resource
     public $name;
 
     /**
-     * @var string The playlists associated with this curator.
+     * @var string The URL for sharing a curator in Apple Music.
      */
     public $url;
 
     /**
-     * @var array The playlists associated with this activity.
+     * @var array The playlists associated with the curator.
      */
     public $playlists = [];
 
@@ -36,7 +38,7 @@ class AppleCurator extends Resource
         $this->name = $data['name'];
         $this->url = $data['url'];
 
-        if (isset($data['editorialNotes'])) {
+        if(isset($data['editorialNotes'])) {
             $this->editorialNotes = new EditorialNotes($data['editorialNotes']);
         }
     }

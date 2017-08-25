@@ -1,7 +1,9 @@
 <?php
 
-namespace AppleMusic\ResourceObjects;
+namespace AppleMusic\Resources;
 
+
+use AppleMusic\Resource;
 
 class Song extends Resource
 {
@@ -28,12 +30,12 @@ class Song extends Resource
     /**
      * @var integer The disc number the song appears on.
      */
-    public $discNumber;
+    public $discNumber = 0;
 
     /**
      * @var integer (Optional) The duration of the song in milliseconds.
      */
-    public $durationInMillis;
+    public $durationInMillis = 0;
 
     /**
      * @var EditorialNotes (Optional) The notes about the song that appear in the iTunes Store.

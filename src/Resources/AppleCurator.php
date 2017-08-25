@@ -1,27 +1,29 @@
 <?php
 
-namespace AppleMusic\ResourceObjects;
+namespace AppleMusic\Resources;
 
 
-class Activity extends Resource
+use AppleMusic\Resource;
+
+class AppleCurator extends Resource
 {
     /**
-     * @var Artwork The activity artwork.
+     * @var Artwork The curator artwork.
      */
     public $artwork;
 
     /**
-     * @var EditorialNotes (Optional) The notes about the activity that appear in the iTunes Store.
+     * @var EditorialNotes (Optional) The notes about the curator that appear in the iTunes Store.
      */
     public $editorialNotes;
 
     /**
-     * @var string The localized name of the activity.
+     * @var string The localized name of the curator.
      */
     public $name;
 
     /**
-     * @var string The URL for sharing an activity in the iTunes Store.
+     * @var string The playlists associated with this curator.
      */
     public $url;
 

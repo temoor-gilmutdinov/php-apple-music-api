@@ -1,6 +1,6 @@
 <?php
 
-namespace AppleMusic\ResourceObjects;
+namespace AppleMusic\Resources;
 
 
 class Artwork

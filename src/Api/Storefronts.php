@@ -3,9 +3,10 @@
 namespace AppleMusic\Api;
 
 
-use AppleMusic\ResourceObjects\Storefront;
+use AppleMusic\Api;
+use AppleMusic\Resources\Storefront;
 
-class Storefronts extends AbstractApi
+class Storefronts extends Api
 {
     /**
      * @param null $limit

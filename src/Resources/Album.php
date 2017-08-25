@@ -1,7 +1,9 @@
 <?php
 
-namespace AppleMusic\ResourceObjects;
+namespace AppleMusic\Resources;
 
+
+use AppleMusic\Resource;
 
 class Album extends Resource
 {
@@ -38,12 +40,12 @@ class Album extends Resource
     /**
      * @var boolean Indicates whether the album is complete. If true, the album is complete; otherwise, it is not. An album is complete if it contains all its tracks and songs.
      */
-    public $isComplete;
+    public $isComplete = false;
 
     /**
      * @var boolean Indicates whether the album contains a single song.
      */
-    public $isSingle;
+    public $isSingle = false;
 
     /**
      * @var string The localized name of the album.
@@ -63,7 +65,7 @@ class Album extends Resource
     /**
      * @var integer The number of tracks.
      */
-    public $trackCount;
+    public $trackCount = 0;
 
     /**
      * @var string The URL for sharing an album in the iTunes Store.

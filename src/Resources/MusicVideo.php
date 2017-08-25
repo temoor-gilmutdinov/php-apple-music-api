@@ -1,7 +1,9 @@
 <?php
 
-namespace AppleMusic\ResourceObjects;
+namespace AppleMusic\Resources;
 
+
+use AppleMusic\Resource;
 
 class MusicVideo extends Resource
 {
@@ -23,7 +25,7 @@ class MusicVideo extends Resource
     /**
      * @var integer (Optional) The duration of the music video in milliseconds.
      */
-    public $durationInMillis;
+    public $durationInMillis = 0;
 
     /**
      * @var EditorialNotes (Optional) The editorial notes for the music video.
@@ -53,7 +55,7 @@ class MusicVideo extends Resource
     /**
      * @var integer (Optional) The number of the music video in the album’s track list.
      */
-    public $trackNumber;
+    public $trackNumber = 0;
 
     /**
      * @var string A clear url directly to the music video.

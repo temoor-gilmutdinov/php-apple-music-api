@@ -2,158 +2,178 @@
 
 namespace AppleMusic;
 
-use GuzzleHttp\Client;
 
-class Api
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Psr\Http\Message\ResponseInterface;
+
+abstract class Api
 {
+    const API_VERSION = 'v1';
+    const API_URL = 'https://api.music.apple.com';
+
     /**
      * @var Client
      */
-    protected $httpClient;
+    private $httpClient;
 
     /**
-     * @var
+     * @var string
      */
-    protected $logger;
+    private $storefront;
 
     /**
-     * @param Client $httpClient
+     * @var string
      */
-    public function __construct(Client $httpClient)
+    private $localization;
+
+    /**
+     * @var array raw response
+     */
+    private $result = [];
+
+    /**
+     * @return array
+     */
+    public function __toString()
+    {
+        return $this->result;
+    }
+
+    public function __construct($httpClient)
     {
         $this->httpClient = $httpClient;
+        $this->storefront = 'us';
     }
 
     /**
-     * @param $token
-     * @return Api
+     * @return string
      */
-    public static function create($token)
+    public function getStorefront()
     {
-        $configurator = new Configuration();
-        $configurator->setToken($token);
-
-        return self::configure($configurator);
+        return $this->storefront;
     }
 
     /**
-     * @param Configuration $configurator
-     * @return Api
+     * @param $storefront
      */
-    public static function configure(Configuration $configurator)
+    public function setStorefront($storefront)
     {
-        return new self($configurator->createClient());
+        $this->storefront = $storefront;
     }
 
     /**
-     * @return Client
+     * @return string
      */
-    public function getHttpClient()
+    public function getLocalization()
     {
-        return $this->httpClient;
+        return $this->localization;
     }
 
     /**
-     * @return Api\Storefronts
+     * @param $localization
      */
-    public function storefronts()
+    public function setLocalization($localization)
     {
-        return new Api\Storefronts($this->httpClient);
+        $this->localization = $localization;
     }
 
     /**
-     * @return Api\Albums
+     * @param $path
+     * @param $id
+     * @param $entity
+     * @param array $params
+     * @return array|null|string
      */
-    public function albums()
+    public function multiple($path, $id, $entity, $params = [])
     {
-        return new Api\Albums($this->httpClient);
+        if (is_array($id)) {
+            $params['ids'] = implode(',', $id);
+
+            return $this->request($path, $params, $entity, true);
+        } else {
+            return $this->request($path . '/' . $id, $params, $entity);
+        }
     }
 
     /**
-     * @return Api\MusicVideos
+     * @param $path
+     * @param $params
+     * @param $entity
+     * @param bool $multiple
+     * @return array|null|string
      */
-    public function musicVideos()
+    protected function request($path, $params, $entity, $multiple = false)
     {
-        return new Api\MusicVideos($this->httpClient);
+        try {
+            $response = $this->httpGet($path, $params);
+
+            return $this->response($response, $entity, $multiple);
+        } catch (RequestException $exception) {
+            return $this->handleErrors($exception);
+        }
     }
 
     /**
-     * @return Api\Playlists
+     * @param RequestException $exception
+     * @return Error
      */
-    public function playlists()
+    protected function handleErrors(RequestException $exception)
     {
-        return new Api\Playlists($this->httpClient);
+        $contents = $exception->getResponse()->getBody()->getContents();
+
+        $result = json_decode($contents, true);
+
+        return new Error($result['errors'][0]);
     }
 
     /**
-     * @return Api\Songs
+     * @param ResponseInterface $response
+     * @param $entity
+     * @param bool $multiple
+     * @return array|null
      */
-    public function songs()
+    protected function response(ResponseInterface $response, $entity, $multiple = false)
     {
-        return new Api\Songs($this->httpClient);
+        $contents = $response->getBody()->getContents();
+
+        $this->result = json_decode($contents, true);
+
+        if ($multiple) {
+            $data = [];
+
+            foreach ($this->result['data'] as $item) {
+                $data[] = new $entity($item);
+            }
+        } elseif (isset($this->result['results'])) {
+            $data = new $entity($this->result['results']);
+        } else {
+            $data = new $entity($this->result['data'][0]);
+        }
+
+        return $data;
     }
 
     /**
-     * @return Api\Stations
+     * @param $path
+     * @param array $params
+     * @return mixed|ResponseInterface
      */
-    public function stations()
+    protected function httpGet($path, array $params = [])
     {
-        return new Api\Stations($this->httpClient);
-    }
+        if ($this->localization) {
+            $params['l'] = $this->localization;
+        }
 
-    /**
-     * @return Api\Artists
-     */
-    public function artists()
-    {
-        return new Api\Artists($this->httpClient);
-    }
+        $params = array_filter($params);
+        if (count($params) > 0) {
+            $path .= '?' . http_build_query($params);
+        }
 
-    /**
-     * @return Api\Curators
-     */
-    public function curators()
-    {
-        return new Api\Curators($this->httpClient);
-    }
+        $path = strtr($path, [
+            '{storefront}' => $this->storefront
+        ]);
 
-    /**
-     * @return Api\Activities
-     */
-    public function activities()
-    {
-        return new Api\Activities($this->httpClient);
-    }
-
-    /**
-     * @return Api\AppleCurators
-     */
-    public function appleCurators()
-    {
-        return new Api\AppleCurators($this->httpClient);
-    }
-
-    /**
-     * @return Api\Charts
-     */
-    public function charts()
-    {
-        return new Api\Charts($this->httpClient);
-    }
-
-    /**
-     * @return Api\Genres
-     */
-    public function genres()
-    {
-        return new Api\Genres($this->httpClient);
-    }
-
-    /**
-     * @return Api\Search
-     */
-    public function search()
-    {
-        return new Api\Search($this->httpClient);
+        return $this->httpClient->request('GET', $path);
     }
 }

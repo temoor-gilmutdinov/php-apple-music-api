@@ -3,9 +3,10 @@
 namespace AppleMusic\Api;
 
 
-use AppleMusic\ResourceObjects\AppleCurator;
+use AppleMusic\Api;
+use AppleMusic\Resources\AppleCurator;
 
-class AppleCurators extends AbstractApi
+class AppleCurators extends Api
 {
     /**
      * @param $id

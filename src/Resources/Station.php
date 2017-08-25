@@ -1,7 +1,9 @@
 <?php
 
-namespace AppleMusic\ResourceObjects;
+namespace AppleMusic\Resources;
 
+
+use AppleMusic\Resource;
 
 class Station extends Resource
 {

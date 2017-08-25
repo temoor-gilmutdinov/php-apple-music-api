@@ -1,6 +1,6 @@
 <?php
 
-namespace AppleMusic\ResourceObjects;
+namespace AppleMusic\Resources;
 
 
 class Chart
@@ -30,12 +30,17 @@ class Chart
      */
     public $next;
 
-    public function __construct($data)
+    public function __construct($data, $entity)
     {
         $this->name = $data['name'];
         $this->chart = $data['chart'];
         $this->href = $data['href'];
-        $this->data = $data['data'];
+
+        if (isset($data['data'])) {
+            foreach ($data['data'] as $item) {
+                $this->data[] = new $entity($item);
+            }
+        }
 
         if (isset($data['next'])) {
             $this->next = $data['next'];

@@ -3,9 +3,10 @@
 namespace AppleMusic\Api;
 
 
-use AppleMusic\ResourceObjects\Song;
+use AppleMusic\Api;
+use AppleMusic\Resources\Song;
 
-class Songs extends AbstractApi
+class Songs extends Api
 {
     /**
      * @param $id

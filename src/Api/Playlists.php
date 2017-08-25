@@ -3,9 +3,10 @@
 namespace AppleMusic\Api;
 
 
-use AppleMusic\ResourceObjects\Playlist;
+use AppleMusic\Api;
+use AppleMusic\Resources\Playlist;
 
-class Playlists extends AbstractApi
+class Playlists extends Api
 {
     /**
      * @param $id

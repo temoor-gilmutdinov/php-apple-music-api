@@ -3,9 +3,10 @@
 namespace AppleMusic\Api;
 
 
-use AppleMusic\ResourceObjects\Activity;
+use AppleMusic\Api;
+use AppleMusic\Resources\Activity;
 
-class Activities extends AbstractApi
+class Activities extends Api
 {
     /**
      * @param $id

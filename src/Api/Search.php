@@ -3,44 +3,46 @@
 namespace AppleMusic\Api;
 
 
-class Search extends AbstractApi
+use AppleMusic\Api;
+use AppleMusic\Resources\SearchHint;
+use AppleMusic\Resources\Search as SearchResponse;
+
+class Search extends Api
 {
     /**
      * @param $term
-     * @param null $types
+     * @param array $types
      * @param null $limit
      * @param null $offset
      * @return array|null
      */
-    public function query($term, $types = null, $limit = null, $offset = null)
+    public function query($term, $types = [], $limit = null, $offset = null)
     {
         $params = [
             'term' => urlencode($term),
-            'types' => $types,
+            'types' => implode(',', $types),
             'limit' => $limit,
             'offset' => $offset,
         ];
 
-        //todo переделать
-
-        return $this->request('catalog/{storefront}/search', $params);
+        return $this->request('catalog/{storefront}/search', $params, SearchResponse::class);
     }
 
     /**
      * @param $term
-     * @param null $types
+     * @param array $types
      * @param null $limit
-     * @return mixed
+     * @return array|null
      */
-    public function hints($term, $types = null, $limit = null)
+    public function hints($term, $types = [], $limit = null)
     {
-        $params = $this->prepareParams([
+        $params = [
             'term' => urlencode($term),
-            'types' => $types,
+            'types' => implode(',', $types),
             'limit' => $limit
-        ]);
+        ];
 
-        return $this->requestWithStorefront('catalog/{storefront}/search/hints', $params);
+        return $this->request('catalog/{storefront}/search/hints', $params, SearchHint::class);
     }
 
 }

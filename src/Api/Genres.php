@@ -3,9 +3,10 @@
 namespace AppleMusic\Api;
 
 
-use AppleMusic\ResourceObjects\Genre;
+use AppleMusic\Api;
+use AppleMusic\Resources\Genre;
 
-class Genres extends AbstractApi
+class Genres extends Api
 {
     /**
      * @param null $limit

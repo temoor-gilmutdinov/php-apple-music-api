@@ -7,8 +7,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 
 class Configuration
 {

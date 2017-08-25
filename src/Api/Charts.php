@@ -3,9 +3,10 @@
 namespace AppleMusic\Api;
 
 
-use AppleMusic\ResourceObjects\Chart;
+use AppleMusic\Api;
+use AppleMusic\Resources\Charts as ChartsResponse;
 
-class Charts extends AbstractApi
+class Charts extends Api
 {
     /**
      * @param $types
@@ -25,6 +26,6 @@ class Charts extends AbstractApi
             'offset' => $offset
         ];
 
-        return $this->request('catalog/{storefront}/charts', $params, Chart::class, true);
+        return $this->request('catalog/{storefront}/charts', $params, ChartsResponse::class);
     }
 }
