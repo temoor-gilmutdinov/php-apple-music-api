@@ -16,8 +16,7 @@ class Albums extends Api
     public function get($id, $include = [])
     {
         return $this->multiple('catalog/{storefront}/albums', $id, Album::class, [
-            'include' => implode(',', $include),
-            'limit' => 100
+            'include' => implode(',', $include)
         ]);
     }
 }

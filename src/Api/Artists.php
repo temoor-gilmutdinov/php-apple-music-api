@@ -34,7 +34,7 @@ class Artists extends Api
             'limit' => $limit
         ];
 
-        return $this->request('catalog/{storefront}/artists/' . $id . '/albums', $params, Albums::class);
+        return $this->request('catalog/{storefront}/artists/' . $id . '/albums', $params, Albums::class, true);
     }
 
     /**
@@ -50,6 +50,6 @@ class Artists extends Api
             'limit' => $limit
         ];
 
-        return $this->request('catalog/{storefront}/artists/' . $id . '/music-videos', $params, MusicVideo::class);
+        return $this->request('catalog/{storefront}/artists/' . $id . '/music-videos', $params, MusicVideo::class, true);
     }
 }
