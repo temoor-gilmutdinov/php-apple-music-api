@@ -113,12 +113,15 @@ class Song extends Resource
 
         $this->artistName = $data['artistName'];
         $this->artwork = new Artwork($data['artwork']);
-        $this->discNumber = $data['discNumber'];
         $this->genreNames = $data['genreNames'];
         $this->name = $data['genreNames'];
         $this->releaseDate = $data['releaseDate'];
         $this->trackNumber = $data['trackNumber'];
         $this->url = $data['url'];
+
+        if (isset($data['discNumber'])) {
+            $this->discNumber = $data['discNumber'];
+        }
 
         if (isset($data['composerName'])) {
             $this->composerName = $data['composerName'];
